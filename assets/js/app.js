@@ -45,10 +45,8 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     var xAxis = d3.axisBottom(xTimeScale);
     var yAxis = d3.axisLeft(yLinearScale);
    
-    // Step 4: Append Axes to the chart
-    // ==============================
-   
-    // Step 5: Create Circles
+    
+    // Step 4: Create Circles and Labels
     // ==============================
        
 
@@ -74,6 +72,9 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     .attr("x", function(d){return -11})
     .attr("y", function(d){return 0});
     
+    // Step 5: Append Axes to the chart
+    // ==============================
+   
     chartGroup.append("g")
     .attr("transform", `translate (0,${height})`)
     .call(xAxis);
@@ -104,7 +105,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Healthcare");
+      .text("Lacks Healthcare (%)");
 
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)

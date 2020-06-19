@@ -51,26 +51,27 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
        
 
     var circlesGroup = chartGroup.selectAll("circle")
-    .data(healthData)
-    .enter()
-    .append("circle")
-    .attr("cx", d => xTimeScale(d.poverty))
-    .attr("cy", d => yLinearScale(d.healthcare))
-    .attr("r","15")
-    .attr("fill","gray")
-    .attr("opacity",".5");
+      .data(healthData)
+      .enter()
+      .append("circle")
+      .attr("cx", d => xTimeScale(d.poverty))
+      .attr("cy", d => yLinearScale(d.healthcare))
+      .attr("r","15")
+      .attr("fill","#5BABEF")
+      .attr("opacity",".8");
     
     var stateLabel = chartGroup.selectAll("text")
-    .data(healthData)
-    .enter()
-    .append("text")
-    .text(d => d.abbr)
-    .attr("dx", d => xTimeScale(d.poverty))
-    .attr("dy", d => yLinearScale(d.healthcare))    
-    .classed("circletext",true)
-    .attr("alignment-baseline","central")
-    .attr("x", function(d){return -11})
-    .attr("y", function(d){return 0});
+      .data(healthData)
+      .enter()
+      .append("text")
+      .text(d => d.abbr)
+      .attr("dx", d => xTimeScale(d.poverty))
+      .attr("dy", d => yLinearScale(d.healthcare))    
+      .classed("circletext",true)
+      .attr("fill","white")
+      .attr("alignment-baseline","central")
+      .attr("text-anchor","middle");
+    
     
     // Step 5: Append Axes to the chart
     // ==============================
@@ -79,25 +80,8 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     .attr("transform", `translate (0,${height})`)
     .call(xAxis);
     chartGroup.append("g")
-    .call(yAxis);
-   
-     
-
-   
-    // ==============================
-    var toolTip = d3.select("body")
-      .append("div")
-      .classed("tooltip",true);
-
-
-    // Step 8: Create event listeners to display and hide the tooltip
-    // ==============================
-    circlesGroup.on("mouseover",function(d,i){
-      toolTip.style("display","block");
-      toolTip.html(`<strong>${d.abbr}, ${d.poverty}</strong>`)
-        .style("left",d3.event.pageX + "px")
-        .style("top",d3.event.pageY + "px")
-    })
+    .call(yAxis);  
+    
     // Create axes labels
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
